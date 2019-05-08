@@ -1,8 +1,11 @@
 {
   "presets": [
-    "env"
+    "env",
   ],
   "plugins": [
-    "transform-vue-jsx"
+    "transform-vue-jsx",
+    "syntax-dynamic-import",
+    "transform-runtime",
+    "transform-object-rest-spread",
   ]
 }
