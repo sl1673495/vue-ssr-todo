@@ -12,7 +12,6 @@ const config = {
   },
   resolve: {
     extensions: ['.vue', '.js', '.json']
-
   },
   module: {
     rules: [

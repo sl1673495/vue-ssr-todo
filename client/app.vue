@@ -2,11 +2,11 @@
   <div id="app">
     <div id="cover"></div>
     <Header></Header>
-   
     <transition name="fade">
       <router-view></router-view>
     </transition>
     <Footer></Footer>
+    <!-- <loading-full-screen></loading-full-screen> -->
   </div>
 </template>
 
@@ -20,10 +20,8 @@ export default {
   },
   components: {
     Header,
-    Footer
+    Footer,
   },
-  mounted () {
-  }
 }
 </script>
 

@@ -7,8 +7,12 @@ import { errorPlugin } from './plugin'
 import bus from '../util/bus'
 
 import notify from '../components/notification/function'
+import {
+  loadingStart,
+  loadingEnd
+} from '../components/loading/loading-full-screen.js'
 
-const handleError = (err) => {
+const handleError = err => {
   console.log('err: ', err)
   // 处理错误
   if (err.code === 401) {
@@ -29,32 +33,46 @@ export default () => {
     mutations,
     getters,
     actions,
-    plugins: [errorPlugin({
-      onActionError: (e) => {
-        handleError(e)
-      }
-    })]
+    plugins: [
+      errorPlugin({
+        onActionError: e => {
+          handleError(e)
+        }
+      })
+    ]
+  })
+
+  store.subscribeAction({
+    before () {
+      loadingStart()
+    },
+    after () {
+      loadingEnd()
+    }
   })
 
   if (module.hot) {
-    module.hot.accept([
-      './state/state',
-      './mutations/mutations',
-      './actions/actions',
-      './getters/getters'
-    ], () => {
-      const newState = require('./state/state').default
-      const newMutations = require('./mutations/mutations').default
-      const newActions = require('./actions/actions').default
-      const newGetters = require('./getters/getters').default
+    module.hot.accept(
+      [
+        './state/state',
+        './mutations/mutations',
+        './actions/actions',
+        './getters/getters'
+      ],
+      () => {
+        const newState = require('./state/state').default
+        const newMutations = require('./mutations/mutations').default
+        const newActions = require('./actions/actions').default
+        const newGetters = require('./getters/getters').default
 
-      store.hotUpdate({
-        state: newState,
-        mutations: newMutations,
-        getters: newGetters,
-        actions: newActions
-      })
-    })
+        store.hotUpdate({
+          state: newState,
+          mutations: newMutations,
+          getters: newGetters,
+          actions: newActions
+        })
+      }
+    )
   }
 
   return store
