@@ -7,6 +7,7 @@ import { errorPlugin } from './plugin'
 import bus from '../util/bus'
 
 import notify from '../components/notification/function'
+
 import {
   loadingStart,
   loadingEnd
@@ -25,6 +26,7 @@ const handleError = err => {
       content: err.message
     })
   }
+  loadingEnd()
 }
 
 export default () => {
