@@ -1,7 +1,10 @@
 ### vue-ssr-todo
 vue + ssr 打造的todolist
 
-# 使用方法
+### 预览地址
+http://todo.shanshihao.cn
+
+### 使用方法
 进入项目目录，运行
 ```
 npm install
@@ -17,6 +20,9 @@ npm run dev
 npm run build
 npm run start
 ```
+
+生产环境使用pm2：
+pm2 start pm2.yml --env production
 
 #### 技术栈
 *  axios 负责客户端和服务端请求
