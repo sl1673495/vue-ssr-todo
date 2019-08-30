@@ -1,8 +1,6 @@
 import model from '../../model/client-model'
 import notify from '../../components/notification/function'
 
-const wait = time => new Promise(resolve => setTimeout(() => resolve(), time))
-
 export default {
   async fetchTodos ({ commit }) {
     const data = await model.getAllTodos()
@@ -36,10 +34,9 @@ export default {
     commit('startLoading')
     const data = await model.updateTodo(id, todo)
     commit('updateTodo', { id, todo: data })
-    // commit('endLoading')
   },
   async deleteAllCompleted ({commit, state}) {
-    const ids = state.todos.filter(todo => !todo.completed)
+    const ids = state.todos.filter(todo => !!todo.completed)
       .map(({ id }) => id)
     await model.deleteAllCompleted(ids)
     commit('deleteAllCompleted')
